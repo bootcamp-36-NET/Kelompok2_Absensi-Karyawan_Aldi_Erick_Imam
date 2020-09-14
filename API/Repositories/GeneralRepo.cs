@@ -42,7 +42,7 @@ namespace API.Repositories
             return result;
         }
 
-        public async Task<List<TEntity>> GetAll()
+        public virtual async Task<List<TEntity>> GetAll()
         {
             var getAll = await _context.Set<TEntity>().Where(x => x.isDelete == false).ToListAsync();
             return getAll;
