@@ -11794,23 +11794,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ThinkPad\\.nuget\\packages\\": {},
+    "C:\\Users\\imann\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ThinkPad\\Desktop\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\\Client\\Client.csproj",
+      "projectUniqueName": "D:\\GitHub\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Iman\\Client\\Client.csproj",
       "projectName": "Client",
-      "projectPath": "C:\\Users\\ThinkPad\\Desktop\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\\Client\\Client.csproj",
-      "packagesPath": "C:\\Users\\ThinkPad\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ThinkPad\\Desktop\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\\Client\\obj\\",
+      "projectPath": "D:\\GitHub\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Iman\\Client\\Client.csproj",
+      "packagesPath": "C:\\Users\\imann\\.nuget\\packages\\",
+      "outputPath": "D:\\GitHub\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Iman\\Client\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\ThinkPad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\imann\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
