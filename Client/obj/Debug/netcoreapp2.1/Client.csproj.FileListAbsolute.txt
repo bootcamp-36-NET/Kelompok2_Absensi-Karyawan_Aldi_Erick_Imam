@@ -29,3 +29,4 @@ C:\Users\ThinkPad\Desktop\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\Client\obj\
 C:\Users\ThinkPad\Desktop\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\Client\obj\Debug\netcoreapp2.1\Client.dll
 C:\Users\ThinkPad\Desktop\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\Client\obj\Debug\netcoreapp2.1\Client.pdb
 C:\Users\ThinkPad\Desktop\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\Client\obj\Debug\netcoreapp2.1\Client.csproj.CopyComplete
+C:\Users\ThinkPad\Desktop\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\Client\obj\Debug\netcoreapp2.1\Client.csprojAssemblyReference.cache

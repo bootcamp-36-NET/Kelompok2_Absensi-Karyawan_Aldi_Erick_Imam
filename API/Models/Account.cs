@@ -22,10 +22,7 @@ namespace API.Models
     [Table("tb_m_userrole")]
     public class UserRole : IdentityUserRole<string>
     {
-        [ForeignKey("User")]
-        public override string UserId { get; set; }
-
-        [ForeignKey("Role")]
-        public override string RoleId { get; set; }
+        public User User { get; set; }
+        public Role Role { get; set; }
     }
 }
