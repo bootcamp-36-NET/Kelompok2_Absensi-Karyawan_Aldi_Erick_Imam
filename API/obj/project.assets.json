@@ -12529,23 +12529,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\imann\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\aldi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GitHub\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Iman\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\aldi\\Desktop\\Github BC36 Finale\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "D:\\GitHub\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Iman\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\imann\\.nuget\\packages\\",
-      "outputPath": "D:\\GitHub\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Iman\\API\\obj\\",
+      "projectPath": "C:\\Users\\aldi\\Desktop\\Github BC36 Finale\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\aldi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\aldi\\Desktop\\Github BC36 Finale\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\\API\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\imann\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\aldi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12581,6 +12577,7 @@
             "version": "[2.1.2, )"
           },
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
@@ -12591,10 +12588,16 @@
           }
         },
         "imports": [
-          "net461"
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
