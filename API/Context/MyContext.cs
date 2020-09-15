@@ -11,11 +11,8 @@ namespace API.Context
     {
         public MyContext(DbContextOptions<MyContext> options) : base(options) { }
         public DbSet<Employee> Employees { get; set; }
-
-
-
-
-
+        public DbSet<Department> departments { set; get; }
+        public DbSet<Divisions> divisions { set; get; }
 
     }
 }
