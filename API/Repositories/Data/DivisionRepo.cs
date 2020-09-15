@@ -19,7 +19,7 @@ namespace API.Repositories.Data
 
         public override async Task<List<Divisions>> GetAll()
         {
-            var getAll = await _context.divisions.Include("Departments").Where(x => x.isDelete == false).ToListAsync();
+            var getAll = await _context.Divisions.Include("Departments").Where(x => x.isDelete == false).ToListAsync();
             if(!getAll.Equals(null))
             {
                 return getAll;
