@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Client.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Client.Controllers
 {
@@ -11,7 +14,7 @@ namespace Client.Controllers
     {
         HttpClient client = new HttpClient
         {
-            BaseAddress = new Uri("https://localhost:12345/api/")
+            BaseAddress = new Uri("https://localhost:44381/api/")
         };
 
         [Route("/Login")]
@@ -19,6 +22,26 @@ namespace Client.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        [Route("/Login")]
+        public async Task<IActionResult> Login(LoginVM login)
+        {
+            var content = JsonConvert.SerializeObject(login);
+
+            var postTask = await client.PostAsync("Logins", new StringContent(content, Encoding.UTF8, "application/json"));
+            
+            if (postTask.IsSuccessStatusCode)
+            {
+                return RedirectToAction("", "Home");
+            }
+            //return Redirect("/Login");
+
+            ViewData["Validation"] = postTask.Content.ReadAsStringAsync().Result;
+            return View();
+        }
+
+        
 
     }
 }
