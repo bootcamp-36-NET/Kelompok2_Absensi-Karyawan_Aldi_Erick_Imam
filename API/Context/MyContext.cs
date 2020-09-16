@@ -34,7 +34,28 @@ namespace API.Context
                 .HasOne(ur => ur.Role)
                 .WithMany(r => r.UserRoles)
                 .HasForeignKey(ur => ur.RoleId);
+
+            modelBuilder.Entity<Employee>()
+                        .HasOne<User>(e => e.User)
+                        .WithOne(u => u.Employee)
+                        .HasForeignKey<Employee>(u => u.EmployeeId);
+            
+            
         }
-        
+        //protected override void onmodelcreating(modelbuilder modelbuilder)
+        //{
+        //    modelbuilder.entity<userrole>().haskey(ur => new { ur.userid, ur.roleid });
+
+        //    modelbuilder.entity<userrole>()
+        //        .hasone(ur => ur.user)
+        //        .withmany(u => u.userroles)
+        //        .hasforeignkey(ur => ur.userid);
+
+        //    modelbuilder.entity<userrole>()
+        //        .hasone(ur => ur.role)
+        //        .withmany(r => r.userroles)
+        //        .hasforeignkey(ur => ur.roleid);
+        //}
+
     }
 }

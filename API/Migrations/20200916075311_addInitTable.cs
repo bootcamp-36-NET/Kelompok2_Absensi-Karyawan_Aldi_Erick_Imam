@@ -1,12 +1,48 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class addInit : Migration
+    public partial class addInitTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Departments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    createdDate = table.Column<DateTimeOffset>(nullable: false),
+                    deletedDate = table.Column<DateTimeOffset>(nullable: false),
+                    updatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    isDelete = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Departments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tb_Employee",
+                columns: table => new
+                {
+                    EmployeeId = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    CreateDate = table.Column<DateTimeOffset>(nullable: false),
+                    UpdateDate = table.Column<DateTimeOffset>(nullable: false),
+                    DeleteData = table.Column<DateTimeOffset>(nullable: false),
+                    isDelete = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tb_Employee", x => x.EmployeeId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "tb_m_role",
                 columns: table => new
@@ -47,6 +83,30 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Divisions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    createdDate = table.Column<DateTimeOffset>(nullable: false),
+                    deletedDate = table.Column<DateTimeOffset>(nullable: false),
+                    updatedDate = table.Column<DateTimeOffset>(nullable: false),
+                    isDelete = table.Column<bool>(nullable: false),
+                    DepartmentId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Divisions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Divisions_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
+                        principalTable: "Departments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tb_m_userrole",
                 columns: table => new
                 {
@@ -71,6 +131,11 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Divisions_DepartmentId",
+                table: "Divisions",
+                column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_tb_m_userrole_RoleId",
                 table: "tb_m_userrole",
                 column: "RoleId");
@@ -79,7 +144,16 @@ namespace API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Divisions");
+
+            migrationBuilder.DropTable(
+                name: "Tb_Employee");
+
+            migrationBuilder.DropTable(
                 name: "tb_m_userrole");
+
+            migrationBuilder.DropTable(
+                name: "Departments");
 
             migrationBuilder.DropTable(
                 name: "tb_m_role");

@@ -11,18 +11,22 @@ namespace API.Models
     public class User : IdentityUser
     {
         public ICollection<UserRole> UserRoles { get; set; }
+        public Employee Employee { get; set; }
     }
 
     [Table("tb_m_role")]
     public class Role : IdentityRole
     {
         public ICollection<UserRole> UserRoles { get; set; }
+        
     }
 
     [Table("tb_m_userrole")]
     public class UserRole : IdentityUserRole<string>
     {
+
         public User User { get; set; }
         public Role Role { get; set; }
+        
     }
 }

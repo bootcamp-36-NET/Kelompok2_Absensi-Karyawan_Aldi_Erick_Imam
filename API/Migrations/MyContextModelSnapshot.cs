@@ -19,7 +19,75 @@ namespace API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-<<<<<<< HEAD
+            modelBuilder.Entity("API.Models.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTimeOffset>("createdDate");
+
+                    b.Property<DateTimeOffset>("deletedDate");
+
+                    b.Property<bool>("isDelete");
+
+                    b.Property<DateTimeOffset>("updatedDate");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("API.Models.Divisions", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DepartmentId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTimeOffset>("createdDate");
+
+                    b.Property<DateTimeOffset>("deletedDate");
+
+                    b.Property<bool>("isDelete");
+
+                    b.Property<DateTimeOffset>("updatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("Divisions");
+                });
+
+            modelBuilder.Entity("API.Models.Employee", b =>
+                {
+                    b.Property<string>("EmployeeId");
+
+                    b.Property<string>("Address");
+
+                    b.Property<DateTimeOffset>("CreateDate");
+
+                    b.Property<DateTimeOffset>("DeleteData");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<DateTimeOffset>("UpdateDate");
+
+                    b.Property<bool>("isDelete");
+
+                    b.HasKey("EmployeeId");
+
+                    b.ToTable("Tb_Employee");
+                });
+
             modelBuilder.Entity("API.Models.Role", b =>
                 {
                     b.Property<string>("Id")
@@ -87,6 +155,22 @@ namespace API.Migrations
                     b.ToTable("tb_m_userrole");
                 });
 
+            modelBuilder.Entity("API.Models.Divisions", b =>
+                {
+                    b.HasOne("API.Models.Department", "Departments")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("API.Models.Employee", b =>
+                {
+                    b.HasOne("API.Models.User", "User")
+                        .WithOne("Employee")
+                        .HasForeignKey("API.Models.Employee", "EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("API.Models.UserRole", b =>
                 {
                     b.HasOne("API.Models.Role", "Role")
@@ -99,94 +183,6 @@ namespace API.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
-=======
-<<<<<<< HEAD
-=======
-            modelBuilder.Entity("API.Models.Department", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.Property<DateTimeOffset>("createdDate");
-
-                    b.Property<DateTimeOffset>("deletedDate");
-
-                    b.Property<bool>("isDelete");
-
-                    b.Property<DateTimeOffset>("updatedDate");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Departments");
-                });
-
-            modelBuilder.Entity("API.Models.Divisions", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("DepartmentId");
-
-                    b.Property<string>("Name");
-
-                    b.Property<DateTimeOffset>("createdDate");
-
-                    b.Property<DateTimeOffset>("deletedDate");
-
-                    b.Property<bool>("isDelete");
-
-                    b.Property<DateTimeOffset>("updatedDate");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.ToTable("Divisions");
-                });
-
->>>>>>> d47b1edae261bda703958afa3484791fbd31bc2e
-            modelBuilder.Entity("API.Models.Employee", b =>
-                {
-                    b.Property<string>("EmployeeId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Address");
-
-<<<<<<< HEAD
-                    b.Property<DateTimeOffset>("CreateDate");
-=======
-                    b.Property<DateTimeOffset>("CreateData");
->>>>>>> d47b1edae261bda703958afa3484791fbd31bc2e
-
-                    b.Property<DateTimeOffset>("DeleteData");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Phone");
-
-                    b.Property<DateTimeOffset>("UpdateDate");
-
-                    b.Property<bool>("isDelete");
-
-                    b.HasKey("EmployeeId");
-
-                    b.ToTable("Tb_Employee");
-                });
-<<<<<<< HEAD
-=======
-
-            modelBuilder.Entity("API.Models.Divisions", b =>
-                {
-                    b.HasOne("API.Models.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId");
-                });
->>>>>>> d47b1edae261bda703958afa3484791fbd31bc2e
->>>>>>> 5b887104fc160049e9679c3626142cf6dd9e7b75
 #pragma warning restore 612, 618
         }
     }
