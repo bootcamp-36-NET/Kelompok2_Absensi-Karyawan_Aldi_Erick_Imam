@@ -48,7 +48,7 @@ namespace Client.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("", "Home");
         }
 
         public void Session(string stream)
