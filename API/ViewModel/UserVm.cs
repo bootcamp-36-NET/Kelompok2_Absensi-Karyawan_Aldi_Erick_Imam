@@ -7,8 +7,7 @@ namespace API.ViewModel
 {
     public class UserVm
     {
-        public class UserVM
-        {
+        
             public string Id { get; set; }
             public string Username { get; set; }
             public string Email { get; set; }
@@ -17,6 +16,6 @@ namespace API.ViewModel
             public string RoleID { get; set; }
             public string RoleName { get; set; }
             public string VerifyCode { get; set; }
-        }
+        
     }
 }

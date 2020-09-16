@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using API.Context;
 using API.Models;
 using API.ViewModel;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static API.ViewModel.UserVm;
 
 namespace API.Controllers
 {
@@ -21,23 +23,48 @@ namespace API.Controllers
         }
         private readonly MyContext _context;
         // GET api/values
+
+        
+
         [HttpPost]
-        public IActionResult Create(EmployeeVm employeeVm) {
+        public async Task<IActionResult> Create(UserVm userVm) {
             if (ModelState.IsValid)
             {
-                var item = new Employee {
-                    EmployeeId = employeeVm.EmployeeId,
-                    Name = employeeVm.Name,
-                    Address = employeeVm.Address,
-                    Phone = employeeVm.Phone,
+                var stamp = new Guid();
+                var uId = new Guid();
+                var user = new User
+
+                {
+                    //Id = uId.ToString(),
+                    UserName = userVm.Username,
+                    Email = userVm.Email,
+                    SecurityStamp = stamp.ToString(),
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(userVm.Password),
+                    PhoneNumber = userVm.Phone,
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0
+                };
+                 await _context.Users.AddAsync(user);
+                var uRole = new UserRole
+                {
+                    UserId = user.Id,
+                    RoleId = "1"
+                };
+                await _context.UserRoles.AddAsync(uRole);
+                var emp = new Employee
+                {
+                    EmployeeId = user.Id,
                     CreateDate = DateTimeOffset.Now,
                     isDelete = false
-
                 };
-                _context.Employees.Add(item);
-                _context.SaveChanges();
-                return Ok("Create Succesfully");
+                await _context.Employees.AddAsync(emp);
+                var addUser= _context.SaveChangesAsync();
+                return Ok(addUser+("Mantap"));
             }
+            
             return BadRequest("Failed");
         }
 
