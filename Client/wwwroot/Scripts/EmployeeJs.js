@@ -122,7 +122,7 @@ function Update() {
             });
             table.ajax.reload(null, false);
         } else {
-            Swal.fire('Error', 'Failed to Input', 'error');
+            Swal.fire('Error', 'Failed to Update', 'error');
             ClearScreen();
         }
     })
