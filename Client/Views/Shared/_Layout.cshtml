@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@{
+    var chicken = Context.Session.GetString("Id");
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -42,20 +48,20 @@
             </form>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                
+
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        Erick Alexander
+                    <a class="nav-link" data-toggle="dropdown" href="#" id="nameUser">
+                        Guest
                         <i class="right fas fa-caret-down"></i>
-                        
+
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <div class="dropdown-divider"></div>
                         <a href="Accounts/Logout" class="dropdown-item">
                             Logout
                         </a>
-                        
+
                     </div>
                 </li>
                 <li class="nav-item">
@@ -81,7 +87,7 @@
                         <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" id="nameUser" class="d-block">Guest</a>
                     </div>
                 </div>
                 <!-- SidebarSearch Form -->
@@ -100,7 +106,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
-                        
+
                         <li class="nav-header">MENU</li>
                         <li class="nav-item">
                             <a href="./" class="nav-link">
@@ -137,7 +143,7 @@
                                 <p>Employee Administrator</p>
                             </a>
                         </li>
-                        
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -151,11 +157,10 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Blank Page</h1>
+                            <h1 id="idUser">@chicken</h1>
                         </div>
                         <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                            </ol>
+                            <ol class="breadcrumb float-sm-right"></ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -167,12 +172,12 @@
                     <div class="card-header">
                         <h3 class="card-title">Title</h3>
                         <div class="card-tools">
-                            
+
                         </div>
                     </div>
                     <div class="card-body">
                         @RenderBody()
-                        
+
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
@@ -206,6 +211,8 @@
     <script src="~/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/dist/js/demo.js"></script>
+
+    <script src="~/Scripts/LayoutScript.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
