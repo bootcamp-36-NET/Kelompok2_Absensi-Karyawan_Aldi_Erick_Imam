@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using API.Context;
 using API.Models;
-using Client.ViewModels;
+using API.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,14 +30,14 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(LoginVM login)
+        public async Task<IActionResult> Post(LoginVm login)
         {
             try
             {
                 var userExist = await _context.Users.Where(u => u.UserName == login.UserId).SingleOrDefaultAsync();
                 if(userExist != null)
                 {
-                    if(BCrypt.Net.BCrypt.Verify(login.Password, userExist.PasswordHash))
+                    if (BCrypt.Net.BCrypt.Verify(login.Password, userExist.PasswordHash))
                     {
                         return Ok(new JwtSecurityTokenHandler().WriteToken(Token(userExist)));
                     }

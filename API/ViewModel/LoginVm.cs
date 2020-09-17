@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Client.ViewModels
+namespace API.ViewModel
 {
-    public class LoginVM
+    public class LoginVm
     {
         [Required]
         public string UserId { get; set; }

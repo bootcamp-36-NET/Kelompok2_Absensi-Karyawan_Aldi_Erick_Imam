@@ -57,6 +57,7 @@ namespace Client
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseStatusCodePages();
 
             app.UseSession();
             app.UseMvc(routes =>
