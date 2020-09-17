@@ -4624,20 +4624,6 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
-      },
-      "Client/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.1",
-        "dependencies": {
-          "Microsoft.NETCore.App": "2.1.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.9"
-        },
-        "compile": {
-          "bin/placeholder/Client.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Client.dll": {}
-        }
       }
     }
   },
@@ -12564,17 +12550,11 @@
         "system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
       ]
-    },
-    "Client/1.0.0": {
-      "type": "project",
-      "path": "../Client/Client.csproj",
-      "msbuildProject": "../Client/Client.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
       "BCrypt.Net-Core >= 1.6.0",
-      "Client >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.NETCore.App >= 2.1.0",
@@ -12610,11 +12590,7 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
-          "projectReferences": {
-            "D:\\GitHub\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\\Client\\Client.csproj": {
-              "projectPath": "D:\\GitHub\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\\Client\\Client.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

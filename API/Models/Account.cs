@@ -12,6 +12,7 @@ namespace API.Models
     {
         public ICollection<UserRole> UserRoles { get; set; }
         public Employee Employee { get; set; }
+        public Absence Absence { get; set; }
     }
 
     [Table("tb_m_role")]
