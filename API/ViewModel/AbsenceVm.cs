@@ -10,5 +10,8 @@ namespace API.ViewModel
         public string Id {get; set;}
         public DateTimeOffset TimeIn { get; set; }
         public DateTimeOffset TimeOut { get; set; }
+        public string UserId { get; set; }
+
+        public string Type { get; set; }
     }
 }

@@ -44,7 +44,7 @@ namespace API.Context
             modelBuilder.Entity<Absence>()
                         .HasOne<User>(e => e.User)
                         .WithOne(u => u.Absence)
-                        .HasForeignKey<Absence>(u => u.Id);
+                        .HasForeignKey<Absence>(u => u.UserId);
 
 
         }

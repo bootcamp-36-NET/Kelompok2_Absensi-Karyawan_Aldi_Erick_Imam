@@ -27,14 +27,13 @@ $(document).ready(function () {
             { "data": "address" },
             {
                 "data": "createDate",
-                "searchable": false,
                 'render': function (jsonDate) {
                     var date = new Date(jsonDate);
                     if (date.getFullYear() != 0001) {
                         return moment(date).format('lll')
                     }
+                    return date;
                 }
-                //searchable: false
             },
             {
                 "sortable": false,

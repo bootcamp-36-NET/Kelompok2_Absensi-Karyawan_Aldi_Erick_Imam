@@ -67,7 +67,7 @@ namespace Client.Controllers
             return Json(emp);
         }
 
-        public JsonResult InsertOrUpdate(EmployeeVm employeeVm, string id)
+        public JsonResult InsertOrUpdate(EmployeeVm employeeVm)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace Client.Controllers
                 }
                 else if (employeeVm.EmployeeId != null)
                 {
-                    var result = client.PutAsync("employees/" + id, byteContent).Result;
+                    var result = client.PutAsync("employees/" + employeeVm.EmployeeId, byteContent).Result;
                     return Json(result);
                 }
 
