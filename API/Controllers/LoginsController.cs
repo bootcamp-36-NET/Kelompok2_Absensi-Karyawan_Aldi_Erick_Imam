@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using API.Context;
 using API.Models;
-using Client.ViewModels;
+using API.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

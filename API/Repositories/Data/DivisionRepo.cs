@@ -17,6 +17,15 @@ namespace API.Repositories.Data
             this._context = context;
         }
 
+        public override async Task<int> Create(Divisions division)
+        {
+            division.createdDate = DateTimeOffset.Now;
+            division.Departments = await _context.Departments.FindAsync(division.DepartmentId);
+            await _context.Divisions.AddAsync(division);
+            var create = await _context.SaveChangesAsync();
+            return create;
+        }
+
         public override async Task<List<Divisions>> GetAll()
         {
             var getAll = await _context.Divisions.Include("Departments").Where(x => x.isDelete == false).ToListAsync();

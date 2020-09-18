@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "gawdRzHda+feU4YI337uYoga4NDwhL1SbDgE0DPgS4hcutkPlkAl1QVOe4i67p0Ouy0mrdupDCzYegeJLmOtow==",
+  "dgSpecHash": "RGw56BLllXgCQLMQN1odZK6nSeIfJfP0oN+aeMzhqwBTY+UWVXPu3Rkmc2AUvDwBA5oKyI2jwPJO5Q4je+bC/Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\aldi\\Desktop\\Github BC36 Finale\\Kelompok2_Absensi-Karyawan_Aldi_Erick_Imam\\API\\API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\aldi\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\aldi\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.6\\microsoft.aspnet.webapi.client.5.2.6.nupkg.sha512",
     "C:\\Users\\aldi\\.nuget\\packages\\microsoft.aspnetcore\\2.1.1\\microsoft.aspnetcore.2.1.1.nupkg.sha512",
     "C:\\Users\\aldi\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.1.1\\microsoft.aspnetcore.antiforgery.2.1.1.nupkg.sha512",

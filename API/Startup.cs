@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Context;
 using API.Models;
+using API.Repositories.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +34,8 @@ namespace API
 
             services.AddDbContext<MyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("myConnection")));
             services.AddIdentity<User, Role>().AddEntityFrameworkStores<MyContext>();
+            services.AddScoped<DivisionRepo>();
+            services.AddScoped<DepartmentRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
