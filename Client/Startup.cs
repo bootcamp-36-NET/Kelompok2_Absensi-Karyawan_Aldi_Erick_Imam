@@ -31,6 +31,15 @@ namespace Client
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+<<<<<<< HEAD
+=======
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);//We set Time here 
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+>>>>>>> Erick
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -51,7 +60,13 @@ namespace Client
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+<<<<<<< HEAD
 
+=======
+            app.UseStatusCodePages();
+
+            app.UseSession();
+>>>>>>> Erick
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
