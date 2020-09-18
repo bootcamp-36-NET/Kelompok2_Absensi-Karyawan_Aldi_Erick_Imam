@@ -23,46 +23,58 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult Create(AbsenceVm absenceVm)
         {
-
-            if (absenceVm.Type == "masuk")
+            //var checkIn = _context.Absences.Where(x => x.UserId == absenceVm.UserId && x.TimeIn.Day == DateTimeOffset.Now.Day).FirstOrDefault();
+            var checkIn = _context.Absences.Where(x => x.UserId == absenceVm.UserId && x.isAbsence == true).FirstOrDefault();
+            if (checkIn==null)
             {
-                Absence _absence = new Absence()
-                {
-                    UserId = absenceVm.UserId,
-                    TimeIn = DateTimeOffset.Now
-                };
-
-                _context.Absences.Add(_absence);
-                _context.SaveChanges();
-
-                return Ok("Anda sudah absen masuk");
-            }
-            else if (absenceVm.Type == "pulang")
-            {
-                var user = _context.Absences.Where(x => x.UserId == absenceVm.UserId).FirstOrDefault();
-
-                if (user == null)
-                {
-                    return BadRequest("User belum absen");
-                }
-                else
-                {
-                    if (!user.TimeOut.Equals(null))
+                    if (absenceVm.Type == "masuk")
                     {
-                        return BadRequest("Anda sudah absen pulang");
+                        Absence _absence = new Absence()
+                        {
+                        UserId = absenceVm.UserId,
+                        TimeIn = DateTimeOffset.Now,
+                        isAbsence = true
+                        };
+
+                        _context.Absences.Add(_absence);
+                        //_context.Entry(_absence).State = EntityState.Modified;
+                        _context.SaveChanges();
+
+                        return Ok("Absen masuk berhasil");
                     }
-                }
+                    else if (absenceVm.Type == "pulang")
+                    {
+                        var user = _context.Absences.Where(x => x.UserId == absenceVm.UserId && x.TimeIn.Day == DateTimeOffset.Now.Day).FirstOrDefault();
 
-                user.TimeOut = DateTimeOffset.Now;
-                _context.Absences.Update(user);
-                _context.SaveChanges();
-
-                return Ok("Anda sudah absen pulang");
+                        if (user == null)
+                        {
+                        return BadRequest("User belum absen");
+                        }
+                        else
+                        {
+                            if (!user.TimeOut.Equals(null))
+                            {
+                                user.TimeOut = DateTimeOffset.Now;
+                                user.isAbsence = false;
+                                _context.Entry(user).State = EntityState.Modified;
+                                //_context.Absences.Update(user);
+                                _context.SaveChanges();
+                                return Ok("Absen pulang berhasil");
+                            }
+                            return BadRequest("absen pulang gagal, silahkan coba lagi");
+                        }
+                    }
+                    else
+                    {
+                    return BadRequest("Anda tidak absen masuk 2 kali");
+                    }
+                
             }
             else
             {
-                return BadRequest();
+               return BadRequest("Anda sudah absen masuk");
             }
+               
         }
 
         [HttpGet]

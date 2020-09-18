@@ -14,6 +14,7 @@ namespace API.Models
         public string UserId { get; set; }
         public DateTimeOffset TimeIn { get; set; }
         public DateTimeOffset TimeOut { get; set; }
+        public bool isAbsence { get; set; }
 
         public virtual User User { get; set; }
     }

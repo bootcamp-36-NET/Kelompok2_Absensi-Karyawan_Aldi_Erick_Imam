@@ -38,14 +38,10 @@ $(document).ready(function () {
             {
                 "sortable": false,
                 "render": function (data, type, row, meta) {
-                    //console.log(row);
                     $('[data-toggle="tooltip"]').tooltip();
                     return '<button class="btn btn-outline-info btn-circle" data-placement="left" data-toggle="tooltip" data-animation="false" title="Detail" onclick="return GetById(' + meta.row + ')" ><i class="fa fa-lg fa-info"></i></button>'
                         + '&nbsp;' +
-                        '<button class="btn btn-outline-warning btn-circle" data-placement="right" data-toggle="tooltip" data-animation="false" title="Update" onclick="return GetByIdUD(' + meta.row + ')" ><i class="fa fa-lg fa-edit"></i></button>'
-                    //'<button class="btn btn-outline-warning btn-circle" data-placement="left" data-toggle="tooltip" data-animation="false" title="edit" onclick="return getbyid(' + row.id + ')" ><i class="fa fa-lg fa-edit"></i></button>'
-                    //    + '&nbsp;'
-                    //    +
+                        '<button class="btn btn-outline-warning btn-circle" data-placement="right" data-toggle="tooltip" data-animation="false" title="Update" onclick="return GetByIdUD(' + meta.row + ')" ><i class="fa fa-lg fa-edit"></i></button>'  
                 }
             }
         ]
