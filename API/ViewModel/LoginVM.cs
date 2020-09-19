@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.ViewModel
 {
-    public class LoginVM
+    public class LoginVm
     {
         [Required]
         public string UserId { get; set; }
