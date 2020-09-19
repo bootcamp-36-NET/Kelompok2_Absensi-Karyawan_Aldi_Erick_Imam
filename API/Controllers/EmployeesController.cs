@@ -21,46 +21,66 @@ namespace API.Controllers
         }
         private readonly MyContext _context;
         // GET api/values
+
+        
+
         [HttpPost]
-        public IActionResult Create(EmployeeVm employeeVm) {
+        public async Task<IActionResult> Create(RegistersVm registersVm/*, EmployeeVm employeeVm*/) {
             if (ModelState.IsValid)
             {
-                var item = new Employee {
-                    EmployeeId = employeeVm.EmployeeId,
-                    Name = employeeVm.Name,
-                    Address = employeeVm.Address,
-                    Phone = employeeVm.Phone,
+                var user = new User
+                {
+                    UserName = registersVm.Username,
+                    Email = registersVm.Email,
+                   
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(registersVm.Password),
+                    PhoneNumber = registersVm.Phone,
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0
+                };
+                 await _context.Users.AddAsync(user);
+                var uRole = new UserRole
+                {
+                    UserId = user.Id,
+                    RoleId = "1"
+                };
+                await _context.UserRoles.AddAsync(uRole);
+                var emp = new Employee
+                {
+                    EmployeeId = user.Id,
+                    Name = registersVm.Username,
+                    Address = registersVm.Address,
                     CreateDate = DateTimeOffset.Now,
                     isDelete = false
-
                 };
-                _context.Employees.Add(item);
+                _context.Employees.Add(emp);
                 _context.SaveChanges();
-                return Ok("Create Succesfully");
+                return Ok("Mantap");
             }
+            
             return BadRequest("Failed");
         }
 
         [HttpGet]
-        public async Task<List<Employee>> GetAll()
+        public async Task<List<EmployeeVm>> GetAll()
         {
-            List<Employee> list = new List<Employee>();
-            //var user = new UserVM();
-            var getData = await _context.Employees.Where(x => x.isDelete == false).ToListAsync();
-            if (getData.Count == 0)
+            var getData = await _context.Employees.Include("User").Where(x => x.isDelete == false).ToListAsync();
+            //var getData = await _context.employees.Where(x => x.isDelete==false).ToListAsync();
+            List<EmployeeVm> list = new List<EmployeeVm>();
+            foreach (var employee in getData)
             {
-                return null;
-            }
-            foreach (var item in getData)
-            {
-                var emp = new Employee()
+                EmployeeVm emp = new EmployeeVm()
                 {
-                    EmployeeId = item.EmployeeId,
-                    Name = item.Name,
-                    Address = item.Address,
-                    Phone = item.Phone,
-                    CreateDate = item.CreateDate,
-                    UpdateDate = item.UpdateDate
+                    EmployeeId = employee.User.Id,
+                    Name = employee.Name,
+                    Address = employee.Address,
+                    Phone = employee.User.PhoneNumber,
+                    CreateDate = employee.CreateDate,
+                    UpdateDate = employee.UpdateDate,
+                    DeleteData = employee.DeleteData
                 };
                 list.Add(emp);
             }
@@ -69,21 +89,18 @@ namespace API.Controllers
 
         //[Authorize]
         [HttpGet("{id}")]
-        public Employee GetID(string id)
+        public EmployeeVm GetID(string id)
         {
-            var getData = _context.Employees.SingleOrDefault(x => x.EmployeeId == id);
-            if (getData == null)
-            {
-                return null;
-            }
-            var emp = new Employee()
+            var getData = _context.Employees.Include("User").SingleOrDefault(x => x.EmployeeId == id);
+            EmployeeVm emp = new EmployeeVm()
             {
                 EmployeeId = getData.EmployeeId,
                 Name = getData.Name,
                 Address = getData.Address,
-                Phone = getData.Phone,
+                Phone = getData.User.PhoneNumber,
                 CreateDate = getData.CreateDate,
-                UpdateDate = getData.UpdateDate
+                UpdateDate = getData.UpdateDate,
+                DeleteData = getData.DeleteData
             };
             return emp;
         }
@@ -110,18 +127,16 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(string id, EmployeeVm employeeVm) {
+        public IActionResult Update(string id, Employee employee) {
             if (ModelState.IsValid)
             {
                 var getData = _context.Employees.Find(id);
-                getData.EmployeeId = employeeVm.EmployeeId;
-                getData.Name = employeeVm.Name;
-                getData.Phone = employeeVm.Phone;
-                getData.Address = employeeVm.Address;
+                getData.Name = employee.Name;
+                getData.Phone = employee.Phone;
+                getData.Address = employee.Address;
                 getData.UpdateDate = DateTimeOffset.Now;
                 getData.isDelete = false;
-
-                _context.Employees.Update(getData);
+                
                 _context.SaveChanges();
                 return Ok("Successfuly Updated");
             }

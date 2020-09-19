@@ -17,8 +17,8 @@ namespace API.Models
         public DateTimeOffset UpdateDate { get; set; }
         public DateTimeOffset DeleteData { get; set; }
         public bool isDelete { get; set; }
-        
 
-        
+        public virtual User User { get; set; }
+
     }
 }

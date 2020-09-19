@@ -20,6 +20,7 @@ namespace API.Context
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Divisions> Divisions { get; set; }
+        public DbSet<Absence> Absences { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,7 +35,33 @@ namespace API.Context
                 .HasOne(ur => ur.Role)
                 .WithMany(r => r.UserRoles)
                 .HasForeignKey(ur => ur.RoleId);
+
+            modelBuilder.Entity<Employee>()
+                        .HasOne<User>(e => e.User)
+                        .WithOne(u => u.Employee)
+                        .HasForeignKey<Employee>(u => u.EmployeeId);
+
+            modelBuilder.Entity<Absence>()
+                        .HasOne<User>(e => e.User)
+                        .WithOne(u => u.Absence)
+                        .HasForeignKey<Absence>(u => u.UserId);
+
+
         }
-        
+        //protected override void onmodelcreating(modelbuilder modelbuilder)
+        //{
+        //    modelbuilder.entity<userrole>().haskey(ur => new { ur.userid, ur.roleid });
+
+        //    modelbuilder.entity<userrole>()
+        //        .hasone(ur => ur.user)
+        //        .withmany(u => u.userroles)
+        //        .hasforeignkey(ur => ur.userid);
+
+        //    modelbuilder.entity<userrole>()
+        //        .hasone(ur => ur.role)
+        //        .withmany(r => r.userroles)
+        //        .hasforeignkey(ur => ur.roleid);
+        //}
+
     }
 }
