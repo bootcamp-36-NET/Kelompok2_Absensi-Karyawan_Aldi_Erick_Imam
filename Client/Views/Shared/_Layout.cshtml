@@ -5,21 +5,23 @@
     var role = Context.Session.GetString("Role");
 }
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>@ViewData["Title"]</title>
+    <title>@ViewData["Title"] - Client</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
-    @RenderSection("Styles", required: false)
+    <link href="~/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
 
+    @RenderSection("Styles", required: false)
+    <!-- Theme style -->
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+	
 </head>
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
@@ -33,10 +35,17 @@
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
 
+
                     <a href="./" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="./Home/Contact" class="nav-link">Contact</a>
+
+                    <a href="../../index3.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Contact</a>
+
                 </li>
             </ul>
             <!-- SEARCH FORM -->
@@ -52,6 +61,7 @@
             </form>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
+
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#" id="nameUser">
@@ -83,6 +93,9 @@
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
+
+   
+
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -104,6 +117,7 @@
 
                         <a href="./" id="nameUser0" class="d-block">Guest</a>
 
+
                     </div>
                 </div>
                 <!-- SidebarSearch Form -->
@@ -121,9 +135,12 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library -->
+						with font-awesome or any other icon font library -->
 
                         <li class="nav-header">MENU</li>
+
+                        with font-awesome or any other icon font library -->
+                        <li class="nav-header">EXAMPLES</li>
                         <li class="nav-item">
                             <a href="./" class="nav-link">
                                 <i class="fas fa-home nav-icon"></i>
@@ -163,8 +180,6 @@
                             </li>
                         }
 
-
-
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -179,10 +194,17 @@
                     <div class="row mb-2">
                         <div class="col-sm-6">
 
+
                             <h1 id="idUser" hidden>@userId</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right"></ol>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -193,18 +215,20 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Title</h3>
+
                         <div class="card-tools">
 
-                        </div>
+
                     </div>
                     <div class="card-body">
                         @RenderBody()
-
                     </div>
                     <!-- /.card-body -->
+
                     <div class="card-footer">
                         Footer
                     </div>
+
                     <!-- /.card-footer-->
                 </div>
                 <!-- /.card -->
@@ -238,6 +262,9 @@
 
 
     <script src="~/Scripts/LayoutScript.js"></script>
+
+    <link href="~/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
