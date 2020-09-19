@@ -5,13 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-
-    <Compile Remove="Migrations\20200914080254_addInit.cs" />
-    <Compile Remove="Migrations\20200914080254_addInit.Designer.cs" />
+    <Compile Remove="Migrations\20200919143734_removeUnique.cs" />
+    <Compile Remove="Migrations\20200919143734_removeUnique.Designer.cs" />
+    <Compile Remove="Migrations\20200919144037_removeUnique.cs" />
+    <Compile Remove="Migrations\20200919144037_removeUnique.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
 
     <Folder Include="wwwroot\" />
   </ItemGroup>

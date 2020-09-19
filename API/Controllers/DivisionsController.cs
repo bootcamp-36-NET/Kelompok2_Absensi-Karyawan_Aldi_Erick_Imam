@@ -15,6 +15,7 @@ namespace API.Controllers
     public class DivisionsController : BaseController<Divisions, DivisionRepo>
     {
         private readonly DivisionRepo _repo;
+
         public DivisionsController(DivisionRepo divisionRepo) : base(divisionRepo)
         {
             this._repo = divisionRepo;
@@ -29,7 +30,7 @@ namespace API.Controllers
             item.DepartmentId = divisions.DepartmentId;
 
             var result = await _repo.Update(item);
-            if(result != null)
+            if(result != 0)
             {
                 return Ok("Data updated!");
             }

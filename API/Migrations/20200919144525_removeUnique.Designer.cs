@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20200918154414_addAll")]
-    partial class addAll
+    [Migration("20200919144525_removeUnique")]
+    partial class removeUnique
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,11 +36,9 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                    b.HasIndex("UserId");
 
-                    b.ToTable("Absence");
+                    b.ToTable("tb_m_absence");
                 });
 
             modelBuilder.Entity("API.Models.Department", b =>
@@ -61,7 +59,7 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("tb_m_department");
                 });
 
             modelBuilder.Entity("API.Models.Divisions", b =>
@@ -86,7 +84,7 @@ namespace API.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Divisions");
+                    b.ToTable("tb_m_division");
                 });
 
             modelBuilder.Entity("API.Models.Employee", b =>
@@ -109,7 +107,7 @@ namespace API.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.ToTable("Tb_Employee");
+                    b.ToTable("tb_m_employee");
                 });
 
             modelBuilder.Entity("API.Models.Role", b =>
@@ -182,13 +180,13 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.Absence", b =>
                 {
                     b.HasOne("API.Models.User", "User")
-                        .WithOne("Absence")
-                        .HasForeignKey("API.Models.Absence", "UserId");
+                        .WithMany("Absences")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("API.Models.Divisions", b =>
                 {
-                    b.HasOne("API.Models.Department", "Departments")
+                    b.HasOne("API.Models.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade);

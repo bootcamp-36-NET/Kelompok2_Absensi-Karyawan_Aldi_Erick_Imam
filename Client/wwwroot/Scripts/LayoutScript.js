@@ -6,8 +6,9 @@
         $("#nameUser").text("Guest");
     }
     else {
-        $.getJSON("Employees/Load/" + id, function (data) {
+        $.getJSON("/Employees/GetById/" + id, function (data) {
             $("#nameUser").text(data.name);
+            $("#nameUser0").text(data.name);
         });
     }
 });

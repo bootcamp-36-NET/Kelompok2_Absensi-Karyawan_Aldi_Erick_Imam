@@ -25,7 +25,7 @@ namespace API.Controllers
             var item = await _repo.GetById(Id);
             item.Name = department.Name;
             var updated = await _repo.Update(item);
-            if(updated != null)
+            if(updated != 0)
             {
                 return Ok("Data updated");
             }

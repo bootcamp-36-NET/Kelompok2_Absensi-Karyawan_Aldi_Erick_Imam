@@ -100,11 +100,11 @@
             },
             dataType: "json",
             success: function (response) {
-                if (response.status.toString() === 200) {
-                    swal.fire("success", response.status.toString(), "success");
+                if (response.status.toString() === "200") {
+                    swal.fire("success", response.message.toString(), "success");
                 }
                 else {
-                    swal.fire("error", response.status.toString(), "error");
+                    swal.fire("error", response.message.toString(), "error");
                 }
                 
             }

@@ -31,11 +31,12 @@ namespace API.Controllers
             _configuration = configuration;
         }
 
+        [HttpPost]
         public async Task<IActionResult> Post(LoginVm login)
         {
             try
             {
-                var userExist = await _context.Users.Where(u => u.UserName == login.UserId).SingleOrDefaultAsync();
+                var userExist = await _context.Users.Include(u => u.UserRoles).Where(u => u.UserName == login.UserId).SingleOrDefaultAsync();
                 if(userExist != null)
                 {
                     if (BCrypt.Net.BCrypt.Verify(login.Password, userExist.PasswordHash))
@@ -55,13 +56,6 @@ namespace API.Controllers
 
 
 
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
-        }
-
-
         public JwtSecurityToken Token(User user)
 
         {
@@ -76,7 +70,7 @@ namespace API.Controllers
                 new Claim("UserName", user.UserName),
                 new Claim("Email", user.Email),
                 new Claim("Phone", user.PhoneNumber),
-                new Claim("Role", "Employee")
+                new Claim("Role", _context.Roles.Where(r => r.Id == user.UserRoles.First().RoleId).First().Name)
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

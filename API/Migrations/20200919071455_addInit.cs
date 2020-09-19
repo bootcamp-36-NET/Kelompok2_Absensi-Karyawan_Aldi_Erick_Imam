@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class addAll : Migration
+    public partial class addInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Departments",
+                name: "tb_m_department",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -22,7 +22,7 @@ namespace API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Departments", x => x.Id);
+                    table.PrimaryKey("PK_tb_m_department", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,7 +65,7 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Divisions",
+                name: "tb_m_division",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -79,17 +79,17 @@ namespace API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Divisions", x => x.Id);
+                    table.PrimaryKey("PK_tb_m_division", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Divisions_Departments_DepartmentId",
+                        name: "FK_tb_m_division_tb_m_department_DepartmentId",
                         column: x => x.DepartmentId,
-                        principalTable: "Departments",
+                        principalTable: "tb_m_department",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Absence",
+                name: "tb_m_absence",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -100,9 +100,9 @@ namespace API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Absence", x => x.Id);
+                    table.PrimaryKey("PK_tb_m_absence", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Absence_tb_m_user_UserId",
+                        name: "FK_tb_m_absence_tb_m_user_UserId",
                         column: x => x.UserId,
                         principalTable: "tb_m_user",
                         principalColumn: "Id",
@@ -110,7 +110,7 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tb_Employee",
+                name: "tb_m_employee",
                 columns: table => new
                 {
                     EmployeeId = table.Column<string>(nullable: false),
@@ -124,9 +124,9 @@ namespace API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tb_Employee", x => x.EmployeeId);
+                    table.PrimaryKey("PK_tb_m_employee", x => x.EmployeeId);
                     table.ForeignKey(
-                        name: "FK_Tb_Employee_tb_m_user_EmployeeId",
+                        name: "FK_tb_m_employee_tb_m_user_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "tb_m_user",
                         principalColumn: "Id",
@@ -158,15 +158,15 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Absence_UserId",
-                table: "Absence",
+                name: "IX_tb_m_absence_UserId",
+                table: "tb_m_absence",
                 column: "UserId",
                 unique: true,
                 filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Divisions_DepartmentId",
-                table: "Divisions",
+                name: "IX_tb_m_division_DepartmentId",
+                table: "tb_m_division",
                 column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
@@ -178,19 +178,19 @@ namespace API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Absence");
+                name: "tb_m_absence");
 
             migrationBuilder.DropTable(
-                name: "Divisions");
+                name: "tb_m_division");
 
             migrationBuilder.DropTable(
-                name: "Tb_Employee");
+                name: "tb_m_employee");
 
             migrationBuilder.DropTable(
                 name: "tb_m_userrole");
 
             migrationBuilder.DropTable(
-                name: "Departments");
+                name: "tb_m_department");
 
             migrationBuilder.DropTable(
                 name: "tb_m_role");

@@ -20,15 +20,14 @@ namespace API.Controllers
             _context = context;
         }
 
-        [HttpPost]
         public async Task<IActionResult> Post(User user)
         {
             try
             {
                 user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
                 await _context.Users.AddAsync(user);
-                var addUser = _context.SaveChangesAsync();
-                return Ok(addUser);
+                await _context.SaveChangesAsync();
+                return Ok("Ok");
             }
             catch(Exception)
             {

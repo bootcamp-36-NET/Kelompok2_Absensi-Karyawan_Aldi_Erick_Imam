@@ -21,18 +21,26 @@ namespace API.Controllers
         }
         private readonly MyContext _context;
         [HttpPost]
-        public IActionResult Create(AbsenceVm absenceVm)
+        public IActionResult Create(Dto dto)
         {
-            //var checkIn = _context.Absences.Where(x => x.UserId == absenceVm.UserId && x.TimeIn.Day == DateTimeOffset.Now.Day).FirstOrDefault();
-            var checkIn = _context.Absences.Where(x => x.UserId == absenceVm.UserId && x.isAbsence == true).FirstOrDefault();
+            string userId;
+            try
+            {
+                userId = _context.Users.Where(x => x.UserName == dto.UserName).FirstOrDefault().Id;
+            }
+            catch (Exception)
+            {
+                return BadRequest("User not found");
+            }
+            
+            var checkIn = _context.Absences.Where(x => x.UserId == userId && x.isAbsence == true && x.TimeIn.Day == DateTimeOffset.Now.Day).FirstOrDefault();
             if (checkIn == null)
             {
-                if (absenceVm.Type == "masuk")
-                {
+                
                     Absence _absence = new Absence()
                     {
-                        UserId = absenceVm.UserId,
-                        TimeIn = DateTimeOffset.Now,
+                        UserId = userId,
+                        TimeIn = new DateTimeOffset(2020, 9, 19, 8, 0, 0, new TimeSpan(7, 0, 0)),
                         isAbsence = true
                     };
 
@@ -40,17 +48,17 @@ namespace API.Controllers
                     //_context.Entry(_absence).State = EntityState.Modified;
                     _context.SaveChanges();
 
-                    return Ok("Absen masuk berhasil");
-                }
-            }
-            else if (absenceVm.Type == "pulang")
-            {
-                var dateNow = DateTime.Now.ToString("HH");
-                var dateInt = Convert.ToInt32(dateNow);
+                    return Ok("Checked in accomplished");
                 
-                if (dateInt > 15)
+            }
+            else 
+            {
+                var hourNow = DateTime.Now.ToString("HH");
+                var hourInt = Convert.ToInt32(hourNow);
+                
+                if (hourInt > 15)
                 {
-                    var user = _context.Absences.Where(x => x.UserId == absenceVm.UserId && x.TimeIn.Day == DateTimeOffset.Now.Day).FirstOrDefault();
+                    var user = _context.Absences.Where(x => x.UserId == userId && x.TimeIn.Day == DateTimeOffset.Now.Day).FirstOrDefault();
 
                     if (user == null)
                     {
@@ -75,11 +83,7 @@ namespace API.Controllers
                     return BadRequest("Anda tidak bisa pulang sebelum pukul 16.00 WIB");
                 }
             }
-            else
-            {
-                return BadRequest("Anda sudah absen masuk");
-            }
-            return BadRequest();
+            
         }
 
         [HttpGet]
@@ -103,5 +107,10 @@ namespace API.Controllers
             return Ok(getUsers);
         }
 
+    }
+
+    public class Dto
+    {
+        public string UserName { get; set; }
     }
 }

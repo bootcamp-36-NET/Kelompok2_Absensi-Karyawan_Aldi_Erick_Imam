@@ -26,7 +26,7 @@ namespace API.Controllers
             {
                 role.NormalizedName = role.Name.ToUpper();
                 await _context.Roles.AddAsync(role);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                 return Ok("Roles Added");
             }
             catch(Exception)

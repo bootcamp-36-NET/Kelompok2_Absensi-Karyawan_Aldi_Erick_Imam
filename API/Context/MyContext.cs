@@ -41,10 +41,10 @@ namespace API.Context
                         .WithOne(u => u.Employee)
                         .HasForeignKey<Employee>(u => u.EmployeeId);
 
-            modelBuilder.Entity<Absence>()
-                        .HasOne<User>(e => e.User)
-                        .WithOne(u => u.Absence)
-                        .HasForeignKey<Absence>(u => u.UserId);
+            //modelBuilder.Entity<Absence>()
+            //            .HasOne<User>(e => e.User)
+            //            .WithOne(u => u.Absence)
+            //            .HasForeignKey<Absence>(u => u.UserId);
 
 
         }

@@ -14,7 +14,7 @@ function callTable() {
                 "data": "id", defaultContent: ''
             },
             { "data": "name" },
-            { "data": "departments.name" },
+            { "data": "department.name" },
             {
                 "data": "createdDate",
                 "render": function (jsonDate) {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace API.Models
 {
-    [Table("Departments")]
+    [Table("tb_m_department")]
     public class Department : BaseModel
     {
         [Key]

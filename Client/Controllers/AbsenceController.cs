@@ -27,7 +27,7 @@ namespace Client.Controllers
         {
             var content = JsonConvert.SerializeObject(new { userName = userName });
 
-            var postTask = await client.PostAsync("Absence", new StringContent(content, Encoding.UTF8, "application/json"));
+            var postTask = await client.PostAsync("Absences", new StringContent(content, Encoding.UTF8, "application/json"));
 
             
             return Json(new { status = postTask.StatusCode, message = postTask.Content.ReadAsStringAsync().Result});

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace API.Models
 {
-    [Table("Divisions")]
+    [Table("tb_m_division")]
     public class Divisions : BaseModel
     {
         public int Id { get; set; }
@@ -18,6 +18,6 @@ namespace API.Models
         public bool isDelete { get; set; }
         [ForeignKey("DepartmentId")]
         public int DepartmentId { set; get; }
-        public virtual Department Departments { set; get; }
+        public Department Department { set; get; }
     }
 }

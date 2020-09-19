@@ -26,13 +26,12 @@ namespace Client.Controllers
             IEnumerable<Department> departmentList = null;
             Department departments = null;
 
-            var readTask = client.GetAsync("Departments/" + Id);
-            readTask.Wait();
-            var result = readTask.Result;
+            var readTask = await client.GetAsync("Departments/" + Id);
 
-            if(result.IsSuccessStatusCode)
+
+            if(readTask.IsSuccessStatusCode)
             {
-                var output = result.Content.ReadAsStringAsync().Result;
+                var output = readTask.Content.ReadAsStringAsync().Result;
                 if(Id != null)
                 {
                     departments = JsonConvert.DeserializeObject<Department>(output);
@@ -49,10 +48,8 @@ namespace Client.Controllers
 
             if(Id != null)
             {
-                var postTask = client.PutAsync("departments/" + Id, new StringContent(item, Encoding.UTF8, "application/json"));
-                postTask.Wait();
-                var result = postTask.Result;
-                return Json(new { success = result.IsSuccessStatusCode });
+                var postTask = await client.PutAsync("departments/" + Id, new StringContent(item, Encoding.UTF8, "application/json"));
+                return Json(new { success = postTask.IsSuccessStatusCode });
             }
             else
             {
@@ -67,11 +64,8 @@ namespace Client.Controllers
 
         public async Task<JsonResult> Delete(int Id)
         {
-            var deleteTask = client.DeleteAsync("departments/" + Id);
-            deleteTask.Wait();
-
-            var result = deleteTask.Result;
-            return Json(new { success = result.IsSuccessStatusCode });
+            var deleteTask = await client.DeleteAsync("departments/" + Id);
+            return Json(new { success = deleteTask.IsSuccessStatusCode });
         }
     }
 }

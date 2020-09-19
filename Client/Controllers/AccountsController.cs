@@ -53,6 +53,7 @@ namespace Client.Controllers
             ViewData["Validation"] = postTask.Content.ReadAsStringAsync().Result;
             return View();
         }
+
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

@@ -20,7 +20,7 @@ namespace API.Repositories.Data
         public override async Task<int> Create(Divisions division)
         {
             division.createdDate = DateTimeOffset.Now;
-            division.Departments = await _context.Departments.FindAsync(division.DepartmentId);
+            division.Department = await _context.Departments.FindAsync(division.DepartmentId);
             await _context.Divisions.AddAsync(division);
             var create = await _context.SaveChangesAsync();
             return create;
@@ -29,7 +29,7 @@ namespace API.Repositories.Data
 
         public override async Task<List<Divisions>> GetAll()
         {
-            var getAll = await _context.Divisions.Include("Departments").Where(x => x.isDelete == false).ToListAsync();
+            var getAll = await _context.Divisions.Include(x => x.Department).Where(x => x.isDelete == false).ToListAsync();
             if(!getAll.Equals(null))
             {
                 return getAll;
