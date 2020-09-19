@@ -1,26 +1,14 @@
 ﻿@using Microsoft.AspNetCore.Http
-<<<<<<< HEAD
-
-@{
-    @*var fullName = Context.Session.GetString("FirstName") + " " + Context.Session.GetString("LastName");
-    var role = Context.Session.GetString("Role");*@
-}
-
-
-
-=======
 @{
     var chicken = Context.Session.GetString("Id");
 }
 
 
->>>>>>> 718e524152b07aeec89ef5c23d45ed412fffdf98
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<<<<<<< HEAD
     <title>@ViewData["Title"] - Client</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -30,16 +18,6 @@
     @RenderSection("Styles", required: false)
     <!-- Theme style -->
     <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
-=======
-    <title>@ViewData["Title"]</title>
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
-    @RenderSection("Styles", required: false)
->>>>>>> 718e524152b07aeec89ef5c23d45ed412fffdf98
 </head>
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
@@ -52,17 +30,10 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-<<<<<<< HEAD
                     <a href="../../index3.html" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
-=======
-                    <a href="./" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="./Home/Contact" class="nav-link">Contact</a>
->>>>>>> 718e524152b07aeec89ef5c23d45ed412fffdf98
                 </li>
             </ul>
             <!-- SEARCH FORM -->
@@ -78,7 +49,6 @@
             </form>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-<<<<<<< HEAD
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -91,44 +61,15 @@
                     </div>
                 </li>
 
-=======
-
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#" id="nameUser">
-                        Guest
-                        <i class="right fas fa-caret-down"></i>
-
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <div class="dropdown-divider"></div>
-                        <a href="Accounts/Logout" class="dropdown-item">
-                            Logout
-                        </a>
-
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li>
->>>>>>> 718e524152b07aeec89ef5c23d45ed412fffdf98
             </ul>
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-<<<<<<< HEAD
-            <a href="../../index3.html" class="brand-link">
-                <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
-=======
             <a href="./" class="brand-link">
                 <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Employee Attedance</span>
->>>>>>> 718e524152b07aeec89ef5c23d45ed412fffdf98
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
@@ -138,11 +79,7 @@
                         <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-<<<<<<< HEAD
-                        @*<a href="#" class="d-block">@fullName</a>*@ 
-=======
                         <a href="#" id="nameUser" class="d-block">Guest</a>
->>>>>>> 718e524152b07aeec89ef5c23d45ed412fffdf98
                     </div>
                 </div>
                 <!-- SidebarSearch Form -->
@@ -160,7 +97,6 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-<<<<<<< HEAD
                         with font-awesome or any other icon font library -->
                         <li class="nav-header">EXAMPLES</li>
                         <li class="nav-item">
@@ -206,46 +142,6 @@
                                 </a>
                             </li>
                         }
-=======
-                             with font-awesome or any other icon font library -->
-
-                        <li class="nav-header">MENU</li>
-                        <li class="nav-item">
-                            <a href="./" class="nav-link">
-                                <i class="fas fa-home nav-icon"></i>
-                                <p>Home</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-circle"></i>
-                                <p>
-                                    Administrations
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="./Departments" class="nav-link">
-                                        <i class="far fa-building nav-icon"></i>
-                                        <p>Departments</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="./Divisions" class="nav-link">
-                                        <i class="fas fa-door-open nav-icon"></i>
-                                        <p>Divisions</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-user nav-icon"></i>
-                                <p>Employee Administrator</p>
-                            </a>
-                        </li>
->>>>>>> 718e524152b07aeec89ef5c23d45ed412fffdf98
 
                     </ul>
                 </nav>
@@ -260,19 +156,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-<<<<<<< HEAD
 
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                             </ol>
-=======
-                            <h1 id="idUser">@chicken</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right"></ol>
->>>>>>> 718e524152b07aeec89ef5c23d45ed412fffdf98
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -283,27 +172,12 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Title</h3>
-<<<<<<< HEAD
 
                     </div>
                     <div class="card-body">
                         @RenderBody()
                     </div>
                     <!-- /.card-body -->
-=======
-                        <div class="card-tools">
-
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        @RenderBody()
-
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                        Footer
-                    </div>
->>>>>>> 718e524152b07aeec89ef5c23d45ed412fffdf98
                     <!-- /.card-footer-->
                 </div>
                 <!-- /.card -->
@@ -332,12 +206,7 @@
     <script src="~/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/dist/js/demo.js"></script>
-<<<<<<< HEAD
     <link href="~/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
-=======
-
-    <script src="~/Scripts/LayoutScript.js"></script>
->>>>>>> 718e524152b07aeec89ef5c23d45ed412fffdf98
     @RenderSection("Scripts", required: false)
 </body>
 </html>
