@@ -26,6 +26,7 @@ namespace API.Repositories.Data
             return create;
         }
 
+
         public override async Task<List<Divisions>> GetAll()
         {
             var getAll = await _context.Divisions.Include("Departments").Where(x => x.isDelete == false).ToListAsync();

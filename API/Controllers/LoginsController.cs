@@ -10,6 +10,9 @@ using API.Models;
 using API.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.EntityFrameworkCore;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -28,17 +31,17 @@ namespace API.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post(LoginVM login)
+        public async Task<IActionResult> Post(LoginVm login)
         {
             try
             {
-                var userExist = _context.Users.Where(u => u.UserName == login.UserId).SingleOrDefault();
+                var userExist = await _context.Users.Where(u => u.UserName == login.UserId).SingleOrDefaultAsync();
                 if(userExist != null)
                 {
-                    if(BCrypt.Net.BCrypt.Verify(login.Password, userExist.PasswordHash))
+                    if (BCrypt.Net.BCrypt.Verify(login.Password, userExist.PasswordHash))
                     {
-                        return Ok(new JwtSecurityTokenHandler().WriteToken(token(userExist)));
+                        return Ok(new JwtSecurityTokenHandler().WriteToken(Token(userExist)));
+
                     }
                     return BadRequest("Wrong Password");
                 }
@@ -50,7 +53,17 @@ namespace API.Controllers
             }
         }
 
-        public JwtSecurityToken token(User user)
+
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        public JwtSecurityToken Token(User user)
+
         {
             var claims = new List<Claim>
             {
@@ -59,6 +72,10 @@ namespace API.Controllers
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                 new Claim("UserName", user.UserName),
                 new Claim("Email", user.Email),
+                new Claim("Id", user.Id),
+                new Claim("UserName", user.UserName),
+                new Claim("Email", user.Email),
+                new Claim("Phone", user.PhoneNumber),
                 new Claim("Role", "Employee")
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

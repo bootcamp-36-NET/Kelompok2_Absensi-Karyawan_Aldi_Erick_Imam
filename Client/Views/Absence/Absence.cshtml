@@ -1,0 +1,124 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Absence</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+    <link href="~/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+
+</head>
+<body class="hold-transition login-page" onload="startTime()">
+    <div class="login-box">
+        <div class="login-logo">
+            <h1 href="../../index2.html">Employee Attedance</h1>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <h2 class="login-box-msg">@DateTime.Now.ToString("dd MMM yyyy")</h2>
+                <h2 class="login-box-msg" id="txt"></h2>
+                <form id="form1" action="/Absence/Post/" title="" method="post">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Insert Employee Id" id="userName" name="userName"/>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-address-card"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <input id="submit" type="submit" value="Submit" name="submit" class="btn btn-primary btn-block" />
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+                <p class="mt-3 mb-1">
+                    <a href="./Login">Login</a>
+                </p>
+                <p class="mb-0">
+                    <a href="register.html" class="text-center">Register a new membership</a>
+                </p>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <script src="~/plugins/sweetalert2/sweetalert2.min.js"></script>
+</body>
+
+<script>
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        h = checkTime(h);
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML =
+            h + ":" + m + ":" + s;
+        var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+        if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+        return i;
+    }
+
+    $("#form1").submit(function (event) {
+        debugger;
+        // var nasi = $("#userName").val();
+        event.preventDefault();
+
+        var $form = $(this),
+            url = $form.attr('action');
+
+        $.ajax({
+            url: "/Absence/Post",
+            type: "post",
+            data: {
+                userName: $('#userName').val()
+            },
+            dataType: "json",
+            success: function (response) {
+                if (response.status.toString() === 200) {
+                    swal.fire("success", response.status.toString(), "success");
+                }
+                else {
+                    swal.fire("error", response.status.toString(), "error");
+                }
+                
+            }
+
+        });
+        //$.post('/Absence/Post', { "": $('#userName').val() })
+        //    .success(function () {
+        //        swal.fire("success", response.status.toString(), "success");
+        //    })
+        //    .error(function () {
+        //        swal.fire("error", response.status.toString(), "error");
+        //    });
+    });
+</script>
+
+</html>
+

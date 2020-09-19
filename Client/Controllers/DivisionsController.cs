@@ -48,7 +48,7 @@ namespace Client.Controllers
             return Json(divisionList);
         }
 
-        public async Task<JsonResult> Insert (int? Id, Divisions divisions)
+        public async Task<JsonResult> Insert(int? Id, Divisions divisions)
         {
             var item = JsonConvert.SerializeObject(divisions);
 

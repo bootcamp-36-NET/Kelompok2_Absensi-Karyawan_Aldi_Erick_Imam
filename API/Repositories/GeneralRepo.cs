@@ -19,7 +19,9 @@ namespace API.Repositories
             _context = context;
         }
 
+
         public virtual async Task<int> Create(TEntity entity)
+
         {
             entity.createdDate = DateTimeOffset.Now;
             entity.isDelete = false;

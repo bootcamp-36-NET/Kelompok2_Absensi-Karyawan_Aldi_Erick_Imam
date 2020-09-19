@@ -21,7 +21,7 @@ namespace Client.Controllers
             return View();
         }
 
-        public async Task<JsonResult> Load (int? Id)
+        public async Task<JsonResult> Load(int? Id)
         {
             IEnumerable<Department> departmentList = null;
             Department departments = null;
