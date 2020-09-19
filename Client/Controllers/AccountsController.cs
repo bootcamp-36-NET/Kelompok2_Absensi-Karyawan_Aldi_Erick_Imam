@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
-=======
+
 using System.IdentityModel.Tokens.Jwt;
->>>>>>> Erick
+
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-<<<<<<< HEAD
+
 using Client.ViewModels;
-=======
+
 using API.ViewModel;
 using Microsoft.AspNetCore.Http;
->>>>>>> Erick
+
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -34,11 +33,8 @@ namespace Client.Controllers
 
         [HttpPost]
         [Route("/Login")]
-<<<<<<< HEAD
-        public async Task<IActionResult> Login(LoginVM login)
-=======
         public async Task<IActionResult> Login(LoginVm login)
->>>>>>> Erick
+
         {
             var content = JsonConvert.SerializeObject(login);
 
@@ -46,11 +42,10 @@ namespace Client.Controllers
             
             if (postTask.IsSuccessStatusCode)
             {
-<<<<<<< HEAD
-=======
+
                 var jwt = postTask.Content.ReadAsStringAsync().Result;
                 Session(jwt);
->>>>>>> Erick
+
                 return RedirectToAction("", "Home");
             }
             //return Redirect("/Login");
@@ -58,10 +53,6 @@ namespace Client.Controllers
             ViewData["Validation"] = postTask.Content.ReadAsStringAsync().Result;
             return View();
         }
-
-<<<<<<< HEAD
-        
-=======
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
@@ -89,7 +80,5 @@ namespace Client.Controllers
 
             HttpContext.Session.SetString("Auth", auth);
         }
->>>>>>> Erick
-
     }
 }

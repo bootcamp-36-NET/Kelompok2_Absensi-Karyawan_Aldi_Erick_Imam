@@ -19,11 +19,9 @@ namespace API.Repositories
             _context = context;
         }
 
-<<<<<<< HEAD
+
         public virtual async Task<int> Create(TEntity entity)
-=======
-        public async Task<int> Create(TEntity entity)
->>>>>>> Erick
+
         {
             entity.createdDate = DateTimeOffset.Now;
             entity.isDelete = false;

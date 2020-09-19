@@ -17,7 +17,6 @@ namespace API.Repositories.Data
             this._context = context;
         }
 
-<<<<<<< HEAD
         public override async Task<int> Create(Divisions division)
         {
             division.createdDate = DateTimeOffset.Now;
@@ -27,8 +26,7 @@ namespace API.Repositories.Data
             return create;
         }
 
-=======
->>>>>>> Erick
+
         public override async Task<List<Divisions>> GetAll()
         {
             var getAll = await _context.Divisions.Include("Departments").Where(x => x.isDelete == false).ToListAsync();

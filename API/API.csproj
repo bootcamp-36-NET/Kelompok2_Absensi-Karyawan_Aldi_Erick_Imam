@@ -5,15 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
+
     <Compile Remove="Migrations\20200914080254_addInit.cs" />
     <Compile Remove="Migrations\20200914080254_addInit.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-=======
->>>>>>> Erick
+
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
