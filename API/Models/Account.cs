@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,6 +13,7 @@ namespace API.Models
     {
         public ICollection<UserRole> UserRoles { get; set; }
         public virtual Employee Employee { get; set; }
+        [JsonIgnore]
         public ICollection<Absence> Absences { get; set; }
     }
 

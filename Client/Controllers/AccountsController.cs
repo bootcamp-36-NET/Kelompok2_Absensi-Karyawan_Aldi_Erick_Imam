@@ -22,7 +22,7 @@ namespace Client.Controllers
     {
         HttpClient client = new HttpClient
         {
-            BaseAddress = new Uri("https://localhost:44381/api/")
+            BaseAddress = new Uri("https://localhost:44341/api/")
         };
 
         [Route("/Login")]

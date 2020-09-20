@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using API.Models;
 using Client.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -14,7 +15,7 @@ namespace Client.Controllers
     {
         HttpClient client = new HttpClient
         {
-            BaseAddress = new Uri("https://localhost:44381/api/")
+            BaseAddress = new Uri("https://localhost:44341/api/")
         };
 
         [Route("/Absence")]
@@ -33,6 +34,16 @@ namespace Client.Controllers
             return Json(new { status = postTask.StatusCode, message = postTask.Content.ReadAsStringAsync().Result});
             
             
+        }
+
+        public async Task<JsonResult> Get()
+        {
+            List<Absence> absences = null;
+            var getTask = await client.GetAsync("Absences");
+
+            var content = getTask.Content.ReadAsStringAsync().Result;
+            absences = JsonConvert.DeserializeObject<List<Absence>>(content);
+            return Json(absences);
         }
     }
 }

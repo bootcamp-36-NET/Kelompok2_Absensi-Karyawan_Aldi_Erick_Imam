@@ -20,6 +20,7 @@ namespace API.Controllers
             _context = myContext;
         }
         private readonly MyContext _context;
+
         [HttpPost]
         public IActionResult Create(Dto dto)
         {
@@ -33,14 +34,15 @@ namespace API.Controllers
                 return BadRequest("User not found");
             }
             
-            var checkIn = _context.Absences.Where(x => x.UserId == userId && x.isAbsence == true && x.TimeIn.Day == DateTimeOffset.Now.Day).FirstOrDefault();
+            var checkIn = _context.Absences.Where(x => x.UserId == userId && x.TimeIn.Year >= 1000 && x.TimeIn.Day == DateTimeOffset.Now.Day).FirstOrDefault();
             if (checkIn == null)
             {
-                
+                if (DateTime.Now.Hour >= 6 && DateTime.Now.Hour <= 10)
+                {
                     Absence _absence = new Absence()
                     {
                         UserId = userId,
-                        TimeIn = new DateTimeOffset(2020, 9, 19, 8, 0, 0, new TimeSpan(7, 0, 0)),
+                        TimeIn = DateTimeOffset.Now,
                         isAbsence = true
                     };
 
@@ -49,49 +51,45 @@ namespace API.Controllers
                     _context.SaveChanges();
 
                     return Ok("Checked in accomplished");
+                }
+                else
+                {
+                    return BadRequest("You can only check in at 06:00 and 09:00");
+                }   
                 
             }
             else 
             {
-                var hourNow = DateTime.Now.ToString("HH");
-                var hourInt = Convert.ToInt32(hourNow);
-                
-                if (hourInt > 15)
+                if (DateTime.Now.Hour >= 16)
                 {
                     var user = _context.Absences.Where(x => x.UserId == userId && x.TimeIn.Day == DateTimeOffset.Now.Day).FirstOrDefault();
 
-                    if (user == null)
+                    
+                    if (user.TimeOut.Year <= 1000)
                     {
-                        return BadRequest("Anda belum absen");
+                        user.TimeOut = DateTimeOffset.Now;
+                        user.isAbsence = false;
+                        _context.Entry(user).State = EntityState.Modified;
+                        //_context.Absences.Update(user);
+                        _context.SaveChanges();
+                        return Ok("Check out Accomplished");
                     }
-                    else
-                    {
-                        if (!user.TimeOut.Equals(null))
-                        {
-                            user.TimeOut = DateTimeOffset.Now;
-                            user.isAbsence = false;
-                            _context.Entry(user).State = EntityState.Modified;
-                            //_context.Absences.Update(user);
-                            _context.SaveChanges();
-                            return Ok("Absen pulang berhasil");
-                        }
-                        return BadRequest("absen pulang gagal, silahkan coba lagi");
-                    }
+                    return BadRequest("You can only check two times a day");
+                    
                 }
                 else
                 {
-                    return BadRequest("Anda tidak bisa pulang sebelum pukul 16.00 WIB");
+                    return BadRequest("You cannot check out before 16.00 GMT+7");
                 }
             }
             
         }
 
         [HttpGet]
-
-        public async Task<IActionResult> GetData()
+        public async Task<List<Absence>> GetData()
         {
-            var getData = await _context.Absences.ToListAsync();
-            return Ok(getData);
+            var getData = await _context.Absences.Include(a => a.User).ThenInclude(u => u.Employee).ToListAsync();
+            return getData;
         }
 
         [HttpGet("{Id}")]
