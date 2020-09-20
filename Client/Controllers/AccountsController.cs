@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace Client.Controllers
 {
@@ -27,6 +28,12 @@ namespace Client.Controllers
 
         [Route("/Login")]
         public IActionResult Login()
+        {
+            return View();
+        }
+
+        [Route("/Register")]
+        public IActionResult Register()
         {
             return View();
         }
@@ -51,6 +58,17 @@ namespace Client.Controllers
             //return Redirect("/Login");
 
             ViewData["Validation"] = postTask.Content.ReadAsStringAsync().Result;
+            return View();
+        }
+
+        [HttpPost]
+        [Route("/Register")]
+        public async Task<IActionResult> Register(RegistersVm registersVm)
+
+        {
+            var content = JsonConvert.SerializeObject(registersVm);
+
+            var postTask = await client.PostAsync("Registers", new StringContent(content, Encoding.UTF8, "application/json"));
             return View();
         }
 
