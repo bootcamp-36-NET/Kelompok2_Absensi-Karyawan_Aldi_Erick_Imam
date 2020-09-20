@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Client.ViewModels;
 using API.ViewModel;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Http;
 
 namespace Client.Controllers
 {
@@ -18,13 +19,20 @@ namespace Client.Controllers
         {
             BaseAddress = new Uri("https://localhost:44341/api/")
         };
+
         public IActionResult Index()
         {
-            return View();
+            if (HttpContext.Session.GetString("Role") == "Admin")
+            {
+                return View();
+            }
+            return NotFound();
         }
+
         public JsonResult LoadEmploy()
 
         {
+            client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("Auth"));
             IEnumerable<EmployeeVm> emp = null;
             //var token = HttpContext.Session.GetString("token");
             //client.DefaultRequestHeaders.Add("Authorization", token);
@@ -48,6 +56,7 @@ namespace Client.Controllers
 
         public IActionResult GetById(string id)
         {
+            client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("Auth"));
             EmployeeVm emp = null;
             //var token = HttpContext.Session.GetString("token");
             //client.DefaultRequestHeaders.Add("Authorization", token);

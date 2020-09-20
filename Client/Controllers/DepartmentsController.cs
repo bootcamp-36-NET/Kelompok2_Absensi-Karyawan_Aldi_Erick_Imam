@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 using API.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Client.Controllers
 {
@@ -18,11 +19,16 @@ namespace Client.Controllers
         };
         public IActionResult Index()
         {
-            return View();
+            if(HttpContext.Session.GetString("Role") == "Admin")
+            {
+                return View();
+            }
+            return NotFound();
         }
 
         public async Task<JsonResult> Load(int? Id)
         {
+            client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("Auth"));
             IEnumerable<Department> departmentList = null;
             Department departments = null;
 
@@ -44,6 +50,7 @@ namespace Client.Controllers
 
         public async Task<JsonResult> Insert(int? Id, Department department)
         {
+            client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("Auth"));
             var item = JsonConvert.SerializeObject(department);
 
             if(Id != null)
@@ -64,6 +71,7 @@ namespace Client.Controllers
 
         public async Task<JsonResult> Delete(int Id)
         {
+            client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("Auth"));
             var deleteTask = await client.DeleteAsync("departments/" + Id);
             return Json(new { success = deleteTask.IsSuccessStatusCode });
         }

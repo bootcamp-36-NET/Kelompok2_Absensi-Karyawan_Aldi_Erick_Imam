@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using API.Models;
 using Client.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -43,7 +44,52 @@ namespace Client.Controllers
 
             var content = getTask.Content.ReadAsStringAsync().Result;
             absences = JsonConvert.DeserializeObject<List<Absence>>(content);
+            if (HttpContext.Session.GetString("Role") != "Admin")
+            {
+                absences = absences.Where(a => a.TimeIn.ToString("yyyy-MM-dd") == DateTimeOffset.Now.ToString("yyyy-MM-dd")).ToList();
+            }
+            
             return Json(absences);
+        }
+
+        public async Task<JsonResult> PieChart()
+        {
+            List<Absence> absences = null;
+            var getTask = await client.GetAsync("Absences");
+
+            var content = getTask.Content.ReadAsStringAsync().Result;
+            absences = JsonConvert.DeserializeObject<List<Absence>>(content);
+            
+            var query = absences.Where(a => a.TimeIn.ToString("yyyy-MM-dd") == DateTimeOffset.Now.ToString("yyyy-MM-dd"))
+                .GroupBy(a => a.User.Employee.Divisions.Name)
+                .Select(group => new
+                {
+                    Division = group.Key,
+                    Count = group.Count()
+                });
+            
+
+            return Json(query);
+        }
+
+        public async Task<JsonResult> BarChart()
+        {
+            List<Absence> absences = null;
+            var getTask = await client.GetAsync("Absences");
+
+            var content = getTask.Content.ReadAsStringAsync().Result;
+            absences = JsonConvert.DeserializeObject<List<Absence>>(content);
+
+            var query = absences
+                .GroupBy(a => a.TimeIn.ToString("yyyy-MM-dd"))
+                .Select(group => new
+                {
+                    DateIn = group.Key,
+                    Count = group.Count()
+                }).OrderBy(group => group.DateIn);
+
+
+            return Json(query);
         }
     }
 }

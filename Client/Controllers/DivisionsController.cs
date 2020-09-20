@@ -19,15 +19,16 @@ namespace Client.Controllers
         };
         public IActionResult Index()
         {
-            //if(HttpContext.Session.GetString("Role") == "Admin")
-            //{
+            if (HttpContext.Session.GetString("Role") == "Admin")
+            {
                 return View();
-            //}
-            //return Redirect("/NotFound");
+            }
+            return NotFound();
         }
 
         public async Task<JsonResult> Load (int? id)
         {
+            client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("Auth"));
             IEnumerable<Divisions> divisionList = null;
             Divisions divisions = null;
 
@@ -49,6 +50,7 @@ namespace Client.Controllers
 
         public async Task<JsonResult> Insert(int? Id, Divisions divisions)
         {
+            client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("Auth"));
             var item = JsonConvert.SerializeObject(divisions);
 
             if(Id != null)
@@ -68,6 +70,7 @@ namespace Client.Controllers
 
         public async Task<JsonResult> Delete(int Id)
         {
+            client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("Auth"));
             var deleteTask = await client.DeleteAsync("divisions/" + Id);
 
             return Json(new { success = deleteTask.IsSuccessStatusCode });
