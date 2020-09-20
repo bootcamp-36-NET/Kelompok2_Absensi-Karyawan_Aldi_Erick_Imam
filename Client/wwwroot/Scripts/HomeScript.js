@@ -39,9 +39,6 @@ $(document).ready(function () {
                     }
                     return "No Check Out";
                 }
-            },
-            {
-                "data": null
             }
         ]
 
