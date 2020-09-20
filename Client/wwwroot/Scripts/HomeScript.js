@@ -2,6 +2,19 @@
 
 $(document).ready(function () {
     debugger;
+    var id = $("#idUser").text();
+    $.getJSON("/Absence/GetToday", function (json) {
+        var count = Object.keys(json).length;
+        $("#signIn").text(count);
+    });
+    $.getJSON("/Absence/GetRatio", function (json) {
+        $("#rate").text(json.count.toString());
+    });
+    $.getJSON("/Absence/check" + id, function (json) {
+        if (json.check === true) {
+            $("#check").text("checked");
+        }
+    });
     table = $('#tableHome').DataTable({
         "ajax": {
             'url': "/Absence/Get",
@@ -144,3 +157,4 @@ $.getJSON("/Absence/BarChart", function (json) {
     });
 
 });
+

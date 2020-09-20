@@ -52,6 +52,59 @@ namespace Client.Controllers
             return Json(absences);
         }
 
+        public async Task<JsonResult> GetToday()
+        {
+            List<Absence> absences = null;
+            var getTask = await client.GetAsync("Absences");
+
+            var content = getTask.Content.ReadAsStringAsync().Result;
+            absences = JsonConvert.DeserializeObject<List<Absence>>(content);
+            
+            absences = absences.Where(a => a.TimeIn.ToString("yyyy-MM-dd") == DateTimeOffset.Now.ToString("yyyy-MM-dd")).ToList();
+            
+
+            return Json(absences);
+        }
+
+        public async Task<JsonResult> GetRatio()
+        {
+            List<Absence> absences = null;
+            List<Employee> employees = null;
+            var employeeTask = await client.GetAsync("employees");
+            var absenceTask = await client.GetAsync("absences");
+
+            var content = employeeTask.Content.ReadAsStringAsync().Result;
+            var content2 = absenceTask.Content.ReadAsStringAsync().Result;
+
+            absences = JsonConvert.DeserializeObject<List<Absence>>(content2);
+            employees = JsonConvert.DeserializeObject<List<Employee>>(content);
+
+            absences = absences.Where(a => a.TimeIn.ToString("yyyy-MM-dd") == DateTimeOffset.Now.ToString("yyyy-MM-dd")).ToList();
+            float ratio = (float) absences.Count / employees.Count;
+
+            return Json(new { Count = ratio * 100});
+        }
+
+        public async Task<JsonResult> Check(string id)
+        {
+            List<Absence> absences = null;
+            bool check = true;
+            var getTask = await client.GetAsync("Absences");
+
+            var content = getTask.Content.ReadAsStringAsync().Result;
+            absences = JsonConvert.DeserializeObject<List<Absence>>(content);
+            
+            absences = absences.Where(a => a.TimeIn.ToString("yyyy-MM-dd") == DateTimeOffset.Now.ToString("yyyy-MM-dd")
+            && a.Id == id).ToList();
+            
+            if (absences != null)
+            {
+                check = false;
+            }
+
+            return Json(new { check = check });
+        }
+
         public async Task<JsonResult> PieChart()
         {
             List<Absence> absences = null;
@@ -91,5 +144,10 @@ namespace Client.Controllers
 
             return Json(query);
         }
+    }
+
+    public class Dto
+    {
+        public string id { get; set; }
     }
 }
