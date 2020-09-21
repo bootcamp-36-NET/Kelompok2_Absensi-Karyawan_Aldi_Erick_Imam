@@ -64,12 +64,20 @@ namespace Client.Controllers
         [HttpPost]
         [Route("/Register")]
         public async Task<IActionResult> Register(RegistersVm registersVm)
-
         {
-            var content = JsonConvert.SerializeObject(registersVm);
-
-            var postTask = await client.PostAsync("Registers", new StringContent(content, Encoding.UTF8, "application/json"));
-            return View();
+            var json = JsonConvert.SerializeObject(registersVm);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var result = client.PostAsync("registers/", byteContent).Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return Json(new { status = true, code = result, msg = "Register Success! " });
+            }
+            else
+            {
+                return Json(new { status = false, msg = "Something Wrong!" });
+            }
         }
 
         public IActionResult Logout()

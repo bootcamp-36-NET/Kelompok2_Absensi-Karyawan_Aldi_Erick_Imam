@@ -54,7 +54,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return BadRequest("You can only check in at 06:00 and 09:00");
+                    return BadRequest("You can only check in between 06:00 and 09:00");
                 }   
                 
             }
@@ -88,7 +88,10 @@ namespace API.Controllers
         [HttpGet]
         public async Task<List<Absence>> GetData()
         {
-            var getData = await _context.Absences.Include(a => a.User).ThenInclude(u => u.Employee).ToListAsync();
+            var getData = await _context.Absences.Include(a => a.User)
+                .ThenInclude(u => u.Employee)
+                .ThenInclude(e => e.Divisions)
+                .ToListAsync();
             return getData;
         }
 

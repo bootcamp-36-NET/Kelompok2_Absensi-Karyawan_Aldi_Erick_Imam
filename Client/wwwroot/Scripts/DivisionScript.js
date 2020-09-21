@@ -99,7 +99,7 @@ $(document).ready(function () {
     $.getJSON('/Departments/Load', { Id: $(this).val() }, function (data) {
         var options = '<option></option>';
         for (var x = 0; x < data.length; x++) {
-            options += '<option value="' + data[x]['Id'] + '">' + data[x]['Name'] + '</option>';
+            options += '<option value="' + data[x]['id'] + '">' + data[x]['name'] + '</option>';
         }
         $('#departmentId').html(options);
     });
@@ -137,14 +137,16 @@ $('#insert').click(function () {
 
 function Update(id) {
     debugger;
+    
     $('#insertModal').modal('show');
+    
     $.ajax({
         url: "/Divisions/Load/" + id,
         type: "get",
         success: function (response) {
             $('#divisionId').val(response.id);
             $('#divisionName').val(response.name);
-            $('#departmentId').val(response.department.id);
+            $('#departmentId').val(response.departmentId);
             $('#departmentId').trigger('change');
         }
     });

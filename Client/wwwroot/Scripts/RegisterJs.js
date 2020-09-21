@@ -1,5 +1,5 @@
 ﻿$("#register").click(function () {
-        debugger;
+    debugger;
     if ($('#confirmPass').val() == $('#Pass').val()) {
         debugger;
         var auth = new Object();
@@ -7,9 +7,10 @@
         auth.Email = $('#Email').val();
         auth.Password = $('#Pass').val();
         auth.Phone = $('#Phone').val();
+        auth.Address = $('#Address').val();
         $.ajax({
             type: 'POST',
-            url: "/accounts/register",
+            url: "/register",
             cache: false,
             dataType: "JSON",
             data: auth
@@ -30,8 +31,8 @@
                             from: "top",
                             align: "center"
                         },
-                        timer: 10000,
-                        delay: 50000,
+                        timer: 1000,
+                        delay: 5000,
                         animate: {
                             enter: 'animated fadeInDown',
                             exit: 'animated fadeOutUp'
@@ -64,8 +65,8 @@
                             from: "top",
                             align: "center"
                         },
-                        timer: 10000,
-                        delay: 50000,
+                        timer: 1000,
+                        delay: 5000,
                         animate: {
                             enter: 'animated fadeInDown',
                             exit: 'animated fadeOutUp'
@@ -99,8 +100,8 @@
                     from: "top",
                     align: "center"
                 },
-                timer: 10000,
-                delay: 50000,
+                timer: 1000,
+                delay: 5000,
                 animate: {
                     enter: 'animated fadeInDown',
                     exit: 'animated fadeOutUp'
@@ -118,5 +119,4 @@
                     '</div>'
             });
     }
-}
-);
+})

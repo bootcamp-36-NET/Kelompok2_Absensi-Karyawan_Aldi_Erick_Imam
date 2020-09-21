@@ -19,6 +19,7 @@ namespace API.Models
         public bool isDelete { get; set; }
 
         public virtual User User { get; set; }
+        public Divisions Divisions { get; set; }
 
     }
 }
